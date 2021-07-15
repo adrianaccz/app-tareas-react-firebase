@@ -9,6 +9,7 @@ import { Inicio } from './components/Inicio';
 import Perfil from './components/Perfil';
 import {auth} from './firebase'
 import Footer from './components/Footer';
+import Reset from './components/Reset';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
   const [id, setID] = useState('')
   const [descripcion, setDescripcion] = useState('')
   const [date, setDate] = useState('')
+  const [email, setEmail] = useState('')
 
   // Para verificar si existe o no el usuario, si cierra sesion esta funcion se vuelve a ejecutar
   const [firebaseUser, setFirebaseUser] = useState(false)
@@ -44,7 +46,10 @@ useEffect(() => {
         <Switch>
 
           <Route path="/login">
-            <Login/>
+            <Login
+            email={email}
+            setEmail={setEmail}
+            />
           </Route>
 
         <Route path="/tareas">
@@ -77,6 +82,13 @@ useEffect(() => {
 
         <Route path="/admin">
             <Perfil/>
+        </Route>
+
+        <Route path="/reset">
+            <Reset
+            email={email}
+            setEmail={setEmail}
+            />
         </Route>
 
         <Route path="/">

@@ -4,10 +4,12 @@ import {withRouter} from 'react-router-dom'
 
 const Login = (props) => {
 
-    const [email, setEmail] = useState('')
+    //const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     const [esRegistro, setEsRegistro] = useState(true)
+
+    const {email, setEmail} = props
 
     const procesarDatos = (e) => {
         e.preventDefault()
@@ -63,7 +65,7 @@ const Login = (props) => {
             }
         }
 
-    }, [email, password, props.history])
+    }, [email, password, setEmail, props.history])
 
     const login = useCallback(async() => {
         try {
@@ -89,7 +91,7 @@ const Login = (props) => {
                 setError('Contraseña incorrecta')
             }
         }
-    }, [email, password,props.history])
+    }, [email, password, setEmail, props.history])
 
     return (
         <div className="mt-5">
@@ -140,6 +142,19 @@ const Login = (props) => {
                                 esRegistro ? '¿Ya tiene cuenta?' : '¿No tienes cuenta?'
                             }
                         </button>
+                        {
+                            !esRegistro ? (
+                                <div className="text-center">
+                                <button 
+                                    className="btn btn-lg btn-danger btn-sm mt-2 content-center"
+                                    type="button"
+                                    onClick={()=> props.history.push(('/reset'))}
+                                >
+                                    Recuperar contraseña
+                                </button>
+                                </div>
+                            ) : null
+                        }
                     </form>
                 </div>
             </div>

@@ -15,7 +15,7 @@ export const MostrarTareas = (props) => {
             try {
                 
                 
-                const data = await db.collection(props.user.uid).get()
+                const data = await db.collection(props.user.uid).orderBy('fecha', "asc").get()
 
                 // mapeamos el array de data que vamos a construir
                 const arrayData = data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
@@ -92,7 +92,7 @@ export const MostrarTareas = (props) => {
                                         Eliminar
                                     </button>
                                     <button 
-                                        className="btn btn-warning btn-sm float-right mr-4"
+                                        className="btn btn-warning btn-sm float-right mr-4 mt-1"
                                         onClick={()=> activarEdicion(item)}
                                     > 
                                         Editar
@@ -105,9 +105,7 @@ export const MostrarTareas = (props) => {
                     
                 </tbody>
             </table>
-        </div>
-
-            
+        </div>  
         
     )
 }
